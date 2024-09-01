@@ -1,0 +1,16 @@
+SELECT 
+    d.DepartmentName,
+    SUM(e.Salary) AS TotalSalary,
+    AVG(e.Salary) AS AverageSalary,
+    COUNT(e.EmployeeID) AS EmployeeCount,
+    COUNT(p.ProjectID) AS ProjectCount
+FROM 
+    Departments d
+LEFT JOIN 
+    Employees e ON d.DepartmentID = e.DepartmentID
+LEFT JOIN 
+    Projects p ON d.DepartmentID = p.DepartmentID
+GROUP BY 
+    d.DepartmentID, d.DepartmentName
+ORDER BY 
+    TotalSalary DESC NULLS LAST;
